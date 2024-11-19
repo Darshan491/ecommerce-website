@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-briefcase" style="color: #9aeab6;"></i> MD METALS</a>
+        <ul class="navbar-nav ms-auto">
+          <a class="nav-link" aria-current="page" href="{% url 'home' %}"><i class="fa-solid fa-house" style="color: #9aeab6;"></i> Home</a>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#"><i class="fa fa-user" style="color: #9aeab6;"></i> {{request.user}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'logout' %}"><i class="fa fa-sign-out" style="color: #9aeab6;"></i> logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}"><i class="fa-solid fa-users" style="color: #9aeab6;"></i> Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-sign-in" style="color: #9aeab6;"></i> Login</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'collections' %}"><i class="fa-solid fa-cubes" style="color: #9aeab6;"></i> Collections</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping" style="color: #9aeab6;"></i> My Cart</a>
+            </li>
+        </ul>
+          <form class="d-flex" method="POST" action="{% url 'search-venue' %}">
+            {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

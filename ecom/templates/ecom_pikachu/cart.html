@@ -1,0 +1,29 @@
+{% extends 'ecom_pikachu/layout/main.html' %}
+{% block title %}
+My Cart |MD METALS
+{% endblock title %}
+{% block content %}
+
+<section class="bg-light py-4 my-5">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="mb-3">Cart items</h4>
+            <hr style="border-color:purple;">
+        </div>
+            {% for item in cart %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{item.product.Product_image.url}}" height="170px" class="card-img-top" alt="{{item.product.name}}">
+                <div class="card-body">
+                    <a href="#" class="cart-title">{{item.product.name}}</a>
+                  <p class="card-text">Quantity {{item.product_qty}}</p>
+                  <p class="card-text">Amount: {{item.total_cost | stringformat:'d'}}</p>
+                  <a href="#" class="btn btn-primary">Buy Now</a>
+                  <a href="{% url 'remove_cart' item.id %}" onclick="return confirm('Are you sure? to Remove')" class="btn btn-danger"><i class="fa fa-trash"></i> Remove</a>
+                </div>
+              </div>
+            {% endfor %}
+    </div>
+</div>
+</section>
+{% endblock content %}
